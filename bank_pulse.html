@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victaurs - Bank Pulse</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --burgundy: #54140A;
+  --burgundy-light: #6B1D10;
+  --burgundy-faint: #F9F0EE;
+  --burgundy-border: #E0C4BE;
+  --bg: #FDFCFA;
+  --surface: #FFFFFF;
+  --surface-alt: #F7F5F2;
+  --border: #E5E0DA;
+  --border-light: #EFECE7;
+  --text: #1A1A1A;
+  --text-secondary: #5C5C5C;
+  --text-tertiary: #8A8A8A;
+  --green: #1B7A3D;
+  --green-bg: #E8F5EC;
+  --red: #B91C1C;
+  --red-bg: #FEF2F2;
+  --yellow: #92710A;
+  --yellow-bg: #FEF9E7;
+  --blue: #1D4ED8;
+  --blue-bg: #EFF3FE;
+  --gray: #6B7280;
+  --gray-bg: #F3F4F6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:16.5px;line-height:1.72;-webkit-font-smoothing:antialiased}
+.container{max-width:780px;margin:0 auto;padding:3rem 1.5rem 4rem}
+.masthead{border-bottom:2px solid var(--burgundy);padding-bottom:1.5rem;margin-bottom:2rem}
+.brand-wordmark{font-family:'Libre Franklin',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:0.18em;color:var(--burgundy);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-family:'Lora',Georgia,serif;font-size:2.2rem;font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--text);margin-bottom:0.3rem}
+.deck{font-family:'Lora',serif;font-size:1.05rem;font-style:italic;color:var(--text-secondary);margin-bottom:0.6rem}
+.dateline{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--text-tertiary);letter-spacing:0.02em}
+h2{font-family:'Libre Franklin',sans-serif;font-size:1.3rem;font-weight:700;color:var(--burgundy);margin:2.5rem 0 0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--burgundy-border);letter-spacing:-0.01em}
+h3{font-family:'Libre Franklin',sans-serif;font-size:1.02rem;font-weight:700;color:var(--burgundy-light);margin:1.5rem 0 0.5rem}
+p{margin-bottom:1rem}
+strong{font-weight:600}
+.tag{display:inline-block;padding:1px 7px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.02em;vertical-align:middle;border:1px solid transparent}
+.tag-green{background:var(--green-bg);color:var(--green);border-color:#C6E6D0}
+.tag-yellow{background:var(--yellow-bg);color:var(--yellow);border-color:#E8DFB5}
+.tag-red{background:var(--red-bg);color:var(--red);border-color:#FECACA}
+.tag-blue{background:var(--blue-bg);color:var(--blue);border-color:#C7D6FE}
+.tag-gray{background:var(--gray-bg);color:var(--gray);border-color:#D1D5DB}
+.tk{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.88em}
+.pos{color:var(--green);font-family:'IBM Plex Mono',monospace;font-size:.88em}
+.neg{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:.88em}
+.callout{border-left:3px solid var(--burgundy);padding:.85rem 1.1rem;background:var(--burgundy-faint);margin:1.25rem 0;font-size:.95rem;border-radius:0 4px 4px 0}
+.callout-red{border-left-color:var(--red);background:var(--red-bg)}
+.callout-green{border-left-color:var(--green);background:var(--green-bg)}
+.callout-yellow{border-left-color:var(--yellow);background:var(--yellow-bg)}
+.callout p:last-child{margin-bottom:0}
+.scroll-table{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;font-family:'Libre Franklin',sans-serif}
+thead{border-bottom:2px solid var(--burgundy)}
+th{text-align:left;padding:.45rem .65rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--burgundy)}
+td{padding:.5rem .65rem;border-bottom:1px solid var(--border-light);font-size:.84rem;line-height:1.45}
+tr:hover td{background:var(--surface-alt)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:.75rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1rem 1.15rem}
+.card .tk{font-size:.95rem}
+.card .meta{font-size:.78rem;color:var(--text-tertiary);font-family:'IBM Plex Mono',monospace;margin:.15rem 0 .5rem}
+.card p{font-size:.88rem;line-height:1.55;margin-bottom:0}
+.header-row{display:flex;justify-content:space-between;align-items:center}
+.gloss-item{padding:.85rem 0;border-bottom:1px solid var(--border-light)}
+.gloss-item:last-child{border-bottom:none}
+.gloss-label{font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.25rem;display:flex;align-items:center;gap:.5rem}
+.gloss-desc{font-size:.9rem;color:var(--text-secondary);line-height:1.6}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+@media(max-width:700px){.grid-2,.card-grid{grid-template-columns:1fr}h1{font-size:1.8rem}}
+.legend{display:flex;gap:1.25rem;flex-wrap:wrap;margin:1.25rem 0 .5rem;padding:.6rem 0;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
+.legend-item{display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-secondary)}
+.legend-dot{width:8px;height:8px;border-radius:2px}
+.stat-bar{display:flex;gap:1rem;flex-wrap:wrap;margin:1rem 0;padding:1rem;background:var(--surface-alt);border-radius:5px;border:1px solid var(--border)}
+.stat{text-align:center;flex:1;min-width:120px}
+.stat-num{font-family:'IBM Plex Mono',monospace;font-size:1.6rem;font-weight:600;color:var(--burgundy);line-height:1.2}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.08em;margin-top:.2rem}
+.footer{margin-top:3rem;padding-top:1rem;border-top:2px solid var(--burgundy);font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-tertiary);text-align:center}
+.footer .brand-sm{font-family:'Libre Franklin',sans-serif;font-weight:800;letter-spacing:.15em;color:var(--burgundy);font-size:.75rem;text-transform:uppercase;display:block;margin-bottom:.4rem}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="brand-wordmark">VICTAURS</div>
+  <h1>Bank Pulse</h1>
+  <div class="deck">A technical deep dive into 200+ community, regional, and national bank stocks</div>
+  <div class="dateline">February 13, 2026</div>
+</div>
+
+<!-- GLOSSARY -->
+<h2>How to Read This Report</h2>
+<p>This report uses a specific set of technical labels that describe where a stock sits relative to its own moving averages. These are not opinions - they are mechanical readings of price versus trend.</p>
+
+<h3>Trend Signals</h3>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-green">Buy Zone</span></div><div class="gloss-desc">Price is within roughly 10% above its key moving averages and above the longer-term trend. The sweet spot for new entries. Not chasing, not catching a falling knife.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-yellow">Warming Up</span></div><div class="gloss-desc">Price has moved 10-20% above its key averages. Momentum is strong but the stock is starting to stretch. Hold if you own it. Wait for a dip if you do not.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-red">Extended</span></div><div class="gloss-desc">More than 20% above key averages. A mean-reversion pullback is increasingly likely. Do not initiate new positions here.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-gray">Pullback</span></div><div class="gloss-desc">Price has dipped below its shorter-term average but remains above the longer-term trend. Often creates buying opportunities within uptrends.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-blue">Downtrend</span></div><div class="gloss-desc">Price below its 200-day moving average. The trend is broken. Do not buy until the regime changes.</div></div>
+
+<h3>Resistance Signals</h3>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-green">Blue Sky</span></div><div class="gloss-desc">Above the 40-week, 100-week, and 200-week averages. No overhead resistance. The cleanest path higher.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-yellow">Light Resistance</span></div><div class="gloss-desc">Below the 40-week but above the 100-week and 200-week. Some overhead supply. Expect chop.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-blue">Heavy Resistance</span></div><div class="gloss-desc">Below the 200-week moving average. Wall of sellers above. Combined with Downtrend, this is the worst setup in the screen.</div></div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Extended</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> Warming Up</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Buy Zone</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--gray)"></div> Pullback</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Downtrend</div>
+</div>
+
+<!-- SECTOR OVERVIEW -->
+<h2>The Big Picture</h2>
+
+<div class="stat-bar">
+  <div class="stat"><div class="stat-num">95%+</div><div class="stat-label">In Uptrends</div></div>
+  <div class="stat"><div class="stat-num">~190</div><div class="stat-label">Blue Sky</div></div>
+  <div class="stat"><div class="stat-num">4</div><div class="stat-label">In Downtrend</div></div>
+  <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Banks Screened</div></div>
+</div>
+
+<p>The banking sector is one of the strongest technical stories in this entire market. We screened over 200 bank stocks and the picture is remarkably uniform: the vast majority are in uptrends with Blue Sky resistance. This is not a case of a few names carrying the sector. The breadth is extraordinary. Nearly every community and regional bank in the screen is in either Warming Up or Buy Zone on the weekly timeframe, with almost all of them in Blue Sky overhead.</p>
+
+<p>This is happening despite the broader financials ETF (<span class="tk">XLF</span>) being down <span class="neg">-6.0%</span> YTD and in a daily downtrend. The divergence tells you something important: big bank weakness (driven by names like JPM, BAC, and the alt asset managers) is masking what is actually a very healthy underlying picture in community and regional banking. The <span class="tk">KRE</span> regional bank ETF, up <span class="pos">+8.6%</span> YTD in Buy Zone with Blue Sky, captures this reality better than XLF does.</p>
+
+<div class="callout"><p><strong>Key insight:</strong> Do not use XLF as your banking barometer right now. KRE tells a completely different story, and the underlying breadth confirms it. Over 95% of the banks in this screen are in healthy uptrends.</p></div>
+
+<!-- EXTENDED -->
+<h2>Most Extended - Banks Running Hot</h2>
+<p>These banks have moved more than 20% above their 21-week moving average. They are in the strongest uptrends in the group but are stretched. If you own them, the trend is your friend. If you are looking to enter, waiting for a pullback is the disciplined play.</p>
+
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Price</th><th>D21WMA</th><th>YTD</th><th>6Mo</th><th>12Mo</th><th>P/52W</th></tr></thead>
+<tbody>
+<tr><td class="tk">MBIN</td><td>$47.50</td><td>+39.9%</td><td class="pos">+43.2%</td><td class="pos">+43.4%</td><td class="pos">+11.3%</td><td>96.4%</td></tr>
+<tr><td class="tk">AMAL</td><td>$41.28</td><td>+33.1%</td><td class="pos">+29.2%</td><td class="pos">+38.9%</td><td class="pos">+13.6%</td><td>92.4%</td></tr>
+<tr><td class="tk">MOFG</td><td>$49.56</td><td>+31.0%</td><td class="pos">+30.2%</td><td class="pos">+66.4%</td><td class="pos">+52.5%</td><td>99.8%</td></tr>
+<tr><td class="tk">OBT</td><td>$35.43</td><td>+28.9%</td><td class="pos">+24.8%</td><td class="pos">+39.5%</td><td class="pos">+33.2%</td><td>94.1%</td></tr>
+<tr><td class="tk">RRBI</td><td>$89.71</td><td>+26.4%</td><td class="pos">+28.3%</td><td class="pos">+38.1%</td><td class="pos">+55.7%</td><td>91.2%</td></tr>
+<tr><td class="tk">EGBN</td><td>$26.33</td><td>+26.2%</td><td class="pos">+26.3%</td><td class="pos">+45.3%</td><td class="pos">+3.5%</td><td>79.4%</td></tr>
+<tr><td class="tk">ALPIB</td><td>$46.53</td><td>+24.7%</td><td class="pos">+16.9%</td><td class="pos">+59.9%</td><td>N/A</td><td>97.7%</td></tr>
+<tr><td class="tk">CASH</td><td>$91.66</td><td>+22.0%</td><td class="pos">+27.5%</td><td class="pos">+19.1%</td><td class="pos">+14.2%</td><td>88.8%</td></tr>
+<tr><td class="tk">NIC</td><td>$156.11</td><td>+20.5%</td><td class="pos">+29.6%</td><td class="pos">+16.6%</td><td class="pos">+31.0%</td><td>99.6%</td></tr>
+<tr><td class="tk">WASH</td><td>$36.13</td><td>+22.7%</td><td class="pos">+25.3%</td><td class="pos">+23.4%</td><td class="pos">+10.5%</td><td>92.2%</td></tr>
+<tr><td class="tk">STEL</td><td>$39.03</td><td>+23.4%</td><td class="pos">+26.9%</td><td class="pos">+30.1%</td><td class="pos">+33.6%</td><td>92.7%</td></tr>
+<tr><td class="tk">MCB</td><td>$93.99</td><td>+21.1%</td><td class="pos">+22.1%</td><td class="pos">+26.8%</td><td class="pos">+49.8%</td><td>92.4%</td></tr>
+<tr><td class="tk">PKBK</td><td>$28.57</td><td>+21.3%</td><td class="pos">+17.8%</td><td class="pos">+29.8%</td><td class="pos">+44.4%</td><td>92.6%</td></tr>
+<tr><td class="tk">MSBI</td><td>$23.07</td><td>+21.4%</td><td class="pos">+8.8%</td><td class="pos">+26.9%</td><td class="pos">+17.3%</td><td>85.5%</td></tr>
+<tr><td class="tk">NBN</td><td>$121.23</td><td>+21.2%</td><td class="pos">+17.9%</td><td class="pos">+16.7%</td><td class="pos">+16.2%</td><td>89.5%</td></tr>
+<tr><td class="tk">PGC</td><td>$34.00</td><td>+20.4%</td><td class="pos">+22.4%</td><td class="pos">+25.1%</td><td class="neg">-3.3%</td><td>85.7%</td></tr>
+</tbody></table></div>
+
+<p><span class="tk">MBIN</span> (Merchants Financial) leads the pack at 40% above its 21-week average and up 43% YTD. <span class="tk">MOFG</span> (MidWestOne Financial) is up 66% over six months and nearly touching its all-time high. The one to watch carefully: <span class="tk">EGBN</span> (Eagle Bancorp) is extended but has Heavy Resistance overhead, meaning trapped sellers above despite the strong run. That makes it more vulnerable to a reversal than the Blue Sky names.</p>
+
+<!-- WARMING UP -->
+<h2>Warming Up - The Momentum Sweet Spot</h2>
+<p>This is where the bulk of the sector sits. Over 100 bank stocks are currently Warming Up on the weekly timeframe, meaning they are 10-20% above their 21-week moving averages. The trend is strong but not overcooked. These are the names where the risk/reward is most reasonable.</p>
+
+<h3>Large &amp; Mid-Cap Regionals</h3>
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Price</th><th>D21WMA</th><th>YTD</th><th>12Mo</th><th>P/52W</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="tk">WSFS</td><td>$66.99</td><td>+19.0%</td><td class="pos">+21.7%</td><td class="pos">+18.6%</td><td>85.0%</td><td>Strong mid-cap. Both timeframes aligned.</td></tr>
+<tr><td class="tk">CFG</td><td>$65.19</td><td>+16.1%</td><td class="pos">+9.8%</td><td class="pos">+41.6%</td><td>90.1%</td><td>Citizens Financial. 12Mo +42%.</td></tr>
+<tr><td class="tk">BPOP</td><td>$143.11</td><td>+16.9%</td><td class="pos">+13.6%</td><td class="pos">+38.9%</td><td>91.3%</td><td>Popular Inc. Puerto Rico play.</td></tr>
+<tr><td class="tk">MTB</td><td>$230.17</td><td>+15.3%</td><td class="pos">+12.8%</td><td class="pos">+16.8%</td><td>90.0%</td><td>M&amp;T Bank. Large regional. Solid.</td></tr>
+<tr><td class="tk">FITB</td><td>$53.30</td><td>+15.9%</td><td class="pos">+11.7%</td><td class="pos">+22.3%</td><td>90.8%</td><td>Fifth Third. Both timeframes aligned.</td></tr>
+<tr><td class="tk">PNC</td><td>$231.30</td><td>+14.1%</td><td class="pos">+9.4%</td><td class="pos">+18.4%</td><td>87.2%</td><td>PNC Financial. Regional flagship.</td></tr>
+<tr><td class="tk">USB</td><td>$58.07</td><td>+13.5%</td><td class="pos">+7.7%</td><td class="pos">+22.5%</td><td>88.0%</td><td>U.S. Bancorp. Steady gains.</td></tr>
+<tr><td class="tk">KEY</td><td>$21.79</td><td>+11.8%</td><td class="pos">+3.9%</td><td class="pos">+24.7%</td><td>85.3%</td><td>KeyCorp. 12Mo +25%. Room to run.</td></tr>
+<tr><td class="tk">RF</td><td>$29.90</td><td>+12.7%</td><td class="pos">+8.5%</td><td class="pos">+24.3%</td><td>88.2%</td><td>Regions Financial. Blue Sky.</td></tr>
+<tr><td class="tk">WAL</td><td>$93.97</td><td>+11.5%</td><td class="pos">+10.0%</td><td class="pos">+7.6%</td><td>91.9%</td><td>Western Alliance.</td></tr>
+<tr><td class="tk">WTFC</td><td>$152.74</td><td>+11.2%</td><td class="pos">+7.1%</td><td class="pos">+17.6%</td><td>86.2%</td><td>Wintrust Financial.</td></tr>
+</tbody></table></div>
+
+<h3>Community Banks - Notable Momentum</h3>
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Price</th><th>D21WMA</th><th>YTD</th><th>12Mo</th><th>P/52W</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="tk">VLY</td><td>$13.59</td><td>+19.3%</td><td class="pos">+16.3%</td><td class="pos">+37.1%</td><td>95.6%</td><td>Valley National. Strong 12Mo. Nearing high.</td></tr>
+<tr><td class="tk">SFST</td><td>$58.74</td><td>+18.4%</td><td class="pos">+13.6%</td><td class="pos">+62.4%</td><td>92.7%</td><td>Southern First. 62% 12Mo gain.</td></tr>
+<tr><td class="tk">SFBS</td><td>$88.25</td><td>+16.3%</td><td class="pos">+22.9%</td><td class="neg">-0.9%</td><td>80.8%</td><td>ServisFirst. YTD strong, only 81% of high.</td></tr>
+<tr><td class="tk">FBNC</td><td>$60.87</td><td>+15.6%</td><td class="pos">+19.6%</td><td class="pos">+40.5%</td><td>93.7%</td><td>First Bancshares. 12Mo +41%.</td></tr>
+<tr><td class="tk">FCBC</td><td>$39.97</td><td>+17.2%</td><td class="pos">+24.7%</td><td class="neg">-9.3%</td><td>63.4%</td><td>First Community. Big YTD but only 63% of high.</td></tr>
+<tr><td class="tk">TCBI</td><td>$102.50</td><td>+13.2%</td><td class="pos">+11.8%</td><td class="pos">+24.5%</td><td>87.0%</td><td>Texas Capital. Blue Sky.</td></tr>
+<tr><td class="tk">AX</td><td>$96.96</td><td>+12.6%</td><td class="pos">+11.0%</td><td class="pos">+37.8%</td><td>89.6%</td><td>Axos Financial. 12Mo +38%.</td></tr>
+<tr><td class="tk">AMBZ</td><td>$70.87</td><td>+16.6%</td><td class="pos">+10.2%</td><td class="pos">+50.9%</td><td>99.6%</td><td>American Business. At all-time highs.</td></tr>
+<tr><td class="tk">LOB</td><td>$41.01</td><td>+16.9%</td><td class="pos">+18.2%</td><td class="pos">+17.4%</td><td>90.7%</td><td>Live Oak. Beta 1.49. More volatile.</td></tr>
+<tr><td class="tk">BKU</td><td>$48.87</td><td>+14.4%</td><td class="pos">+9.2%</td><td class="pos">+21.0%</td><td>86.4%</td><td>BankUnited. Blue Sky.</td></tr>
+</tbody></table></div>
+
+<p>The Warming Up group is mostly in the 85-95% range of their 52-week highs with Blue Sky resistance. The names closer to 80% of their highs (like <span class="tk">SFBS</span> and <span class="tk">FCBC</span>) have the most runway. Those near 95-100% (like <span class="tk">VLY</span> and <span class="tk">AMBZ</span>) are nearing decision points where they either break to new highs or pull back.</p>
+
+<!-- BUY ZONE -->
+<h2>Buy Zone - Best Technical Setups</h2>
+<p>These are the cleanest entries in the entire screen. Near their moving averages, not stretched, trend intact. If you are building bank exposure from scratch, this is where to start.</p>
+
+<div class="card-grid">
+<div class="card"><div class="header-row"><span class="tk">HIFS</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Hingham Savings &middot; $310.20 &middot; 78% of high</div><p>Only 78% of its 52-week high with Blue Sky. 14% YTD, 12% 12Mo. Most room before resistance. Best risk/reward in the screen.</p></div>
+<div class="card"><div class="header-row"><span class="tk">TFC</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Truist Financial &middot; $51.96 &middot; 81% of high</div><p>Large regional. Both timeframes Buy Zone. 12% 12Mo. Blue Sky. Lots of room to the high.</p></div>
+<div class="card"><div class="header-row"><span class="tk">ZION</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Zions Bancorporation &middot; $61.62 &middot; 83% of high</div><p>Both timeframes Buy Zone. 11% 12Mo. Blue Sky. Clean setup at large-cap scale.</p></div>
+<div class="card"><div class="header-row"><span class="tk">EWBC</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">East West Bancorp &middot; $118.44 &middot; 90% of high</div><p>21% 12Mo gain. Blue Sky. Both timeframes aligned. Strong underlying business.</p></div>
+<div class="card"><div class="header-row"><span class="tk">ABCB</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Ameris Bancorp &middot; $83.59 &middot; 89% of high</div><p>13% YTD, 25% 12Mo. Both timeframes Buy Zone. Blue Sky. Solid mid-cap.</p></div>
+<div class="card"><div class="header-row"><span class="tk">FNB</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">F.N.B. Corp &middot; $18.17 &middot; 88% of high</div><p>Both timeframes Buy Zone. 18% 12Mo. Blue Sky. Low beta (0.92).</p></div>
+<div class="card"><div class="header-row"><span class="tk">SSB</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">SouthState Corp &middot; $104.21 &middot; 86% of high</div><p>Both timeframes aligned. Blue Sky. 11% YTD. Steady, not flashy.</p></div>
+<div class="card"><div class="header-row"><span class="tk">CATY</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Cathay General &middot; $53.36 &middot; 92% of high</div><p>15% 12Mo. Blue Sky. Clean chart. Closer to its high than peers.</p></div>
+<div class="card"><div class="header-row"><span class="tk">FHN</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">First Horizon &middot; $24.72 &middot; 84% of high</div><p>Both timeframes Buy Zone. 12% 12Mo. Blue Sky. Post-merger stabilization.</p></div>
+<div class="card"><div class="header-row"><span class="tk">EFSC</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Enterprise Financial &middot; $60.61 &middot; 90% of high</div><p>12% YTD. Blue Sky. Both timeframes aligned. Beta 0.84.</p></div>
+</div>
+
+<p>The standout is <span class="tk">HIFS</span> (Hingham Institution for Savings) at only 78% of its 52-week high, in Buy Zone with Blue Sky. That combination - healthy trend, not stretched, and 22% of upside before it even reaches its prior high - is exactly what a technical screen is designed to find. <span class="tk">TFC</span> and <span class="tk">ZION</span> offer similar profiles at much larger market caps for those who need liquidity.</p>
+
+<!-- BIG BANKS -->
+<h2>Big Banks - A Different Story</h2>
+<p>While community and regional banks are thriving, the largest banks are showing cracks.</p>
+
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Price</th><th>YTD</th><th>Weekly</th><th>Daily</th><th>P/52W</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="tk">JPM</td><td>$303.97</td><td class="neg">-6.6%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-gray">Pullback</span></td><td>75.4%</td><td>Weekly intact but daily pulling back.</td></tr>
+<tr><td class="tk">BAC</td><td>$52.66</td><td class="neg">-5.9%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-gray">Pullback</span></td><td>80.0%</td><td>Negative 3Mo. Losing momentum.</td></tr>
+<tr><td class="tk">WFC</td><td>$87.32</td><td class="neg">-8.3%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-gray">Pullback</span></td><td>73.5%</td><td>Weakest mega-bank. Only 73% of high.</td></tr>
+<tr><td class="tk">C</td><td>$111.37</td><td class="neg">-6.2%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-gray">Pullback</span></td><td>80.2%</td><td>Still in Blue Sky but fading fast.</td></tr>
+</tbody></table></div>
+
+<p>These are not broken - they are still above their longer-term averages and technically in Blue Sky. But the pullbacks are notable because they contrast so sharply with the strength in the regional and community bank space. The most likely explanation: the big bank trade was a 2024-2025 consensus long, positioning became crowded, and money is now rotating down-cap within banking, favoring smaller institutions with better relative momentum.</p>
+
+<!-- BROKEN -->
+<h2>The Few That Are Broken</h2>
+<p>Only a handful of bank names are in genuine downtrends. They tend to be the more speculative or fintech-adjacent names.</p>
+
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Price</th><th>YTD</th><th>Weekly</th><th>Resistance</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="tk">COF</td><td>$208.37</td><td class="neg">-16.0%</td><td><span class="tag tag-blue">Downtrend</span></td><td><span class="tag tag-yellow">Light</span></td><td>Capital One. Consumer credit fears. Beta 1.14.</td></tr>
+<tr><td class="tk">CCB</td><td>$84.69</td><td class="neg">-25.3%</td><td><span class="tag tag-blue">Downtrend</span></td><td><span class="tag tag-yellow">Light</span></td><td>Coastal Financial. Worst bank in the screen.</td></tr>
+<tr><td class="tk">DAVE</td><td>$178.83</td><td class="neg">-18.5%</td><td><span class="tag tag-blue">Downtrend</span></td><td><span class="tag tag-yellow">Light</span></td><td>Dave Inc. Neobank. Beta 3.89.</td></tr>
+<tr><td class="tk">TBBK</td><td>$58.32</td><td class="neg">-13.8%</td><td><span class="tag tag-blue">Downtrend</span></td><td><span class="tag tag-yellow">Light</span></td><td>Bancorp. Fintech exposure dragging it.</td></tr>
+<tr><td class="tk">GBFH</td><td>$33.44</td><td class="pos">+2.9%</td><td><span class="tag tag-blue">Downtrend</span></td><td><span class="tag tag-blue">Heavy</span></td><td>Global Business. Heavy resistance.</td></tr>
+</tbody></table></div>
+
+<p><span class="tk">COF</span> (Capital One) is the most notable - a major institution in a genuine downtrend, down 16% YTD on consumer credit quality concerns. <span class="tk">DAVE</span> and <span class="tk">TBBK</span> are more niche fintech-adjacent names where the broader fintech weakness is bleeding through. All avoids until the weekly regime flips.</p>
+
+<!-- NAMES NEAR BOTTOM WITH CAUTION FLAGS -->
+<h2>On the Edge - Weekly Buy Zone, Daily Trouble</h2>
+<p>These names look fine on the weekly chart but are showing early cracks on the daily. Worth watching for either a bounce (bullish) or further deterioration (get out).</p>
+
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Price</th><th>YTD</th><th>Weekly</th><th>Daily</th><th>P/52W</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="tk">FCNCA</td><td>$1,999.68</td><td class="neg">-7.4%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-gray">Pullback</span></td><td>69.4%</td><td>First Citizens. Only 69% of high.</td></tr>
+<tr><td class="tk">HBAN</td><td>$17.35</td><td class="neg">-0.7%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-gray">Pullback</span></td><td>72.1%</td><td>Huntington. Weekly still fine. Daily slipping.</td></tr>
+<tr><td class="tk">CMA</td><td>$88.67</td><td class="pos">+0.02%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-gray">Pullback</span></td><td>79.1%</td><td>Comerica. Flat YTD. Needs resolution.</td></tr>
+<tr><td class="tk">ALLY</td><td>$40.86</td><td class="neg">-10.7%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-gray">Pullback</span></td><td>63.9%</td><td>Ally Financial. Auto lending concerns.</td></tr>
+<tr><td class="tk">BANF</td><td>$116.81</td><td class="pos">+9.7%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-blue">Downtrend</span></td><td>48.1%</td><td>BancFirst. Daily broken. Light resistance.</td></tr>
+<tr><td class="tk">CBSH</td><td>$53.96</td><td class="pos">+3.3%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-blue">Downtrend</span></td><td>34.7%</td><td>Commerce Bankshares. Overhead supply.</td></tr>
+<tr><td class="tk">FFIN</td><td>$33.65</td><td class="pos">+12.1%</td><td><span class="tag tag-green">Buy Zone</span></td><td><span class="tag tag-blue">Downtrend</span></td><td>45.3%</td><td>First Financial. Heavy resistance. Caution.</td></tr>
+</tbody></table></div>
+
+<p>When the weekly and daily timeframes disagree, it is often where trend changes start. <span class="tk">BANF</span>, <span class="tk">CBSH</span>, and <span class="tk">FFIN</span> are all weekly Buy Zone but daily Downtrend - and notably, they have either Light, Overhead, or Heavy resistance. These are the weakest "healthy" names in the screen. If the weekly breaks too, they become avoids.</p>
+
+<!-- BOTTOM LINE -->
+<h2>The Bottom Line</h2>
+
+<div class="grid-2">
+<div class="card" style="border-left:3px solid var(--green)"><h3 style="margin-top:0;color:var(--green)">What's Working</h3>
+<p><strong>Breadth</strong> - 95%+ of screened banks in uptrends. Extremely rare.</p>
+<p><strong>Community banks</strong> - Strongest sub-sector. Blue Sky everywhere.</p>
+<p><strong>Mid-cap regionals</strong> - CFG, MTB, FITB, PNC, USB all Warming Up.</p>
+<p style="margin-bottom:0"><strong>Buy Zone setups</strong> - HIFS, TFC, ZION, EWBC, FNB for clean entries.</p>
+</div>
+<div class="card" style="border-left:3px solid var(--red)"><h3 style="margin-top:0;color:var(--red)">What's Not</h3>
+<p><strong>Big banks</strong> - JPM, BAC, WFC all pulling back on daily.</p>
+<p><strong>Capital One</strong> - In downtrend. Consumer credit risk.</p>
+<p><strong>Neobanks/Fintech</strong> - DAVE, TBBK. Fintech weakness bleeding in.</p>
+<p style="margin-bottom:0"><strong>Divergence names</strong> - BANF, CBSH, FFIN. Weekly/daily disagreeing.</p>
+</div>
+</div>
+
+<p>The banking sector is in its best technical shape since the 2023 regional bank crisis. The story is not about big banks - it is about the massive breadth of strength in community and regional names. Money is rotating down-cap within financials, and the screen is pointing clearly at where the opportunities are. Buy Zone names with Blue Sky and room to their highs are where you want to be.</p>
+
+<p><strong>When 95% of an entire sector is trending in the same direction, pay attention.</strong></p>
+
+<div class="footer">
+<span class="brand-sm">VICTAURS</span>
+This is a technical screening summary, not investment advice. Past performance is not indicative of future results. Always do your own due diligence. &middot; Data as of Feb 13, 2026
+</div>
+
+</div>
+</body>
+</html>

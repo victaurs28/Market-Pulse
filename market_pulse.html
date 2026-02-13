@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victaurs - Market Pulse</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --burgundy: #54140A;
+  --burgundy-light: #6B1D10;
+  --burgundy-faint: #F9F0EE;
+  --burgundy-border: #E0C4BE;
+  --bg: #FDFCFA;
+  --surface: #FFFFFF;
+  --surface-alt: #F7F5F2;
+  --border: #E5E0DA;
+  --border-light: #EFECE7;
+  --text: #1A1A1A;
+  --text-secondary: #5C5C5C;
+  --text-tertiary: #8A8A8A;
+  --green: #1B7A3D;
+  --green-bg: #E8F5EC;
+  --red: #B91C1C;
+  --red-bg: #FEF2F2;
+  --yellow: #92710A;
+  --yellow-bg: #FEF9E7;
+  --blue: #1D4ED8;
+  --blue-bg: #EFF3FE;
+  --gray: #6B7280;
+  --gray-bg: #F3F4F6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:16.5px;line-height:1.72;-webkit-font-smoothing:antialiased}
+.container{max-width:780px;margin:0 auto;padding:3rem 1.5rem 4rem}
+
+/* MASTHEAD */
+.masthead{border-bottom:2px solid var(--burgundy);padding-bottom:1.5rem;margin-bottom:2rem}
+.brand-wordmark{font-family:'Libre Franklin',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:0.18em;color:var(--burgundy);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-family:'Lora',Georgia,serif;font-size:2.2rem;font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--text);margin-bottom:0.3rem}
+.deck{font-family:'Lora',serif;font-size:1.05rem;font-style:italic;color:var(--text-secondary);margin-bottom:0.6rem}
+.dateline{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--text-tertiary);letter-spacing:0.02em}
+
+/* SECTIONS */
+h2{font-family:'Libre Franklin',sans-serif;font-size:1.3rem;font-weight:700;color:var(--burgundy);margin:2.5rem 0 0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--burgundy-border);letter-spacing:-0.01em}
+h3{font-family:'Libre Franklin',sans-serif;font-size:1.02rem;font-weight:700;color:var(--burgundy-light);margin:1.5rem 0 0.5rem}
+p{margin-bottom:1rem}
+strong{font-weight:600}
+
+/* TAGS */
+.tag{display:inline-block;padding:1px 7px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.02em;vertical-align:middle;border:1px solid transparent}
+.tag-green{background:var(--green-bg);color:var(--green);border-color:#C6E6D0}
+.tag-yellow{background:var(--yellow-bg);color:var(--yellow);border-color:#E8DFB5}
+.tag-red{background:var(--red-bg);color:var(--red);border-color:#FECACA}
+.tag-blue{background:var(--blue-bg);color:var(--blue);border-color:#C7D6FE}
+.tag-gray{background:var(--gray-bg);color:var(--gray);border-color:#D1D5DB}
+.tk{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.88em}
+.pos{color:var(--green);font-family:'IBM Plex Mono',monospace;font-size:.88em}
+.neg{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:.88em}
+
+/* CALLOUTS */
+.callout{border-left:3px solid var(--burgundy);padding:.85rem 1.1rem;background:var(--burgundy-faint);margin:1.25rem 0;font-size:.95rem;border-radius:0 4px 4px 0}
+.callout-red{border-left-color:var(--red);background:var(--red-bg)}
+.callout-green{border-left-color:var(--green);background:var(--green-bg)}
+.callout-yellow{border-left-color:var(--yellow);background:var(--yellow-bg)}
+.callout p:last-child{margin-bottom:0}
+
+/* TABLES */
+.scroll-table{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;font-family:'Libre Franklin',sans-serif}
+thead{border-bottom:2px solid var(--burgundy)}
+th{text-align:left;padding:.45rem .65rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--burgundy)}
+td{padding:.5rem .65rem;border-bottom:1px solid var(--border-light);font-size:.84rem;line-height:1.45}
+tr:hover td{background:var(--surface-alt)}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:.75rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1rem 1.15rem}
+.card .tk{font-size:.95rem}
+.card .meta{font-size:.78rem;color:var(--text-tertiary);font-family:'IBM Plex Mono',monospace;margin:.15rem 0 .5rem}
+.card p{font-size:.88rem;line-height:1.55;margin-bottom:0}
+.header-row{display:flex;justify-content:space-between;align-items:center}
+.pill-row{display:flex;flex-wrap:wrap;gap:5px;margin:.5rem 0}
+
+/* GLOSSARY */
+.gloss-item{padding:.85rem 0;border-bottom:1px solid var(--border-light)}
+.gloss-item:last-child{border-bottom:none}
+.gloss-label{font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.25rem;display:flex;align-items:center;gap:.5rem}
+.gloss-desc{font-size:.9rem;color:var(--text-secondary);line-height:1.6}
+
+/* LAYOUT */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+@media(max-width:700px){.grid-2,.card-grid{grid-template-columns:1fr}h1{font-size:1.8rem}}
+.legend{display:flex;gap:1.25rem;flex-wrap:wrap;margin:1.25rem 0 .5rem;padding:.6rem 0;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
+.legend-item{display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-secondary)}
+.legend-dot{width:8px;height:8px;border-radius:2px}
+
+/* FOOTER */
+.footer{margin-top:3rem;padding-top:1rem;border-top:2px solid var(--burgundy);font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-tertiary);text-align:center}
+.footer .brand-sm{font-family:'Libre Franklin',sans-serif;font-weight:800;letter-spacing:.15em;color:var(--burgundy);font-size:.75rem;text-transform:uppercase;display:block;margin-bottom:.4rem}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="brand-wordmark">VICTAURS</div>
+  <h1>Market Pulse</h1>
+  <div class="deck">Where the money is actually moving - a technical read across 57 ETFs and 328 stocks</div>
+  <div class="dateline">February 13, 2026</div>
+</div>
+
+<!-- GLOSSARY -->
+<h2>How to Read This Report</h2>
+<p>This report uses a specific set of technical labels that describe where a stock or ETF sits relative to its own moving averages. These are not opinions - they are mechanical readings of price versus trend. If you have never used moving average systems before, read this section first.</p>
+
+<h3>Trend Signals</h3>
+<p>Every name gets a trend reading on two timeframes - weekly and daily. These tell you whether something is in a healthy uptrend, getting stretched, pulling back, or breaking down.</p>
+
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-green">Buy Zone</span></div><div class="gloss-desc">Price is in a healthy range near its moving averages - within roughly 10% above its key averages and above the longer-term trend. This is the sweet spot. The trend is intact, the stock has not run too far too fast, and you are not chasing. If you are going to add exposure, this is typically the best regime to do it in.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-yellow">Warming Up</span></div><div class="gloss-desc">Price has moved 10-20% above its key averages. Momentum is strong and accelerating, but the stock is starting to stretch. Not a great place to initiate a new position, but not a sell signal either. If you already own it, hold. If you do not, consider waiting for a pullback back to Buy Zone.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-red">Extended</span></div><div class="gloss-desc">Price is more than 20% above its key averages. The caution zone. The trend may still be valid, but a mean-reversion pullback is increasingly likely. Buying here means chasing, and even a healthy pullback can feel like a 10-15% drawdown. Extended does not mean "sell everything" - it means "do not add here, wait for a reset."</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-gray">Pullback</span></div><div class="gloss-desc">Price has dipped below its shorter-term average but is still above the longer-term average. The uptrend is intact, but the stock is taking a breather. Pullbacks within uptrends are normal and often create buying opportunities. The question is whether it resolves higher or breaks lower.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-blue">Downtrend</span></div><div class="gloss-desc">Price has fallen below its 200-day moving average. The longer-term trend is broken. Do not buy until the regime changes. The most common mistake is trying to "buy the dip" in a genuine downtrend. A stock that looks cheap often just gets cheaper.</div></div>
+
+<h3>Resistance Signals</h3>
+<p>Every name also gets a resistance reading. When a stock falls from a high, everyone who bought near that high is underwater. When it rallies back, those people sell to "get back to even," creating resistance. The more time spent at higher prices, the harder the climb back.</p>
+
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-green">Blue Sky</span></div><div class="gloss-desc">Price is above its 40-week, 100-week, and 200-week averages. No meaningful overhead resistance. When a stock is in Buy Zone with Blue Sky, that is the cleanest technical setup you can find.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-yellow">Light Resistance</span></div><div class="gloss-desc">Above the 100-week and 200-week averages but below the 40-week. Some overhead supply exists but the longer-term trend is intact. Expect choppy action before a resolution.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-gray">Overhead Supply</span></div><div class="gloss-desc">Above the 200-week average but below the 100-week. Significant resistance above. Rallies tend to stall. The path higher will not be smooth.</div></div>
+<div class="gloss-item"><div class="gloss-label"><span class="tag tag-blue">Heavy Resistance</span></div><div class="gloss-desc">Below the 200-week moving average. Sustained rallies are rare without a fundamental catalyst that changes the narrative. Combined with a Downtrend signal, this is the worst setup in the screen - technically dead until proven otherwise.</div></div>
+
+<h3>Putting It Together</h3>
+<p>The best setup is <strong>Buy Zone + Blue Sky</strong> - healthy trend, not stretched, nothing overhead. The worst is <strong>Downtrend + Heavy Resistance</strong> - broken trend, wall of sellers above. One more metric: <strong>P/52W High</strong> is the current price as a percentage of its 52-week high. A stock at 95% is near its highs; a stock at 10% is near its lows.</p>
+
+<div class="callout"><p><strong>With that framework in hand, let's look at what the market is telling us.</strong></p></div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Extended</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> Warming Up</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Buy Zone</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--gray)"></div> Pullback</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Downtrend</div>
+</div>
+
+<!-- BIG PICTURE -->
+<h2>The Big Picture</h2>
+<p>The S&amp;P 500 (<span class="tk">SPY</span>) is essentially flat year-to-date at <span class="pos">+0.02%</span>. It is sitting in a weekly Buy Zone but the daily trend has pulled back. The Nasdaq 100 (<span class="tk">QQQ</span>) is negative at <span class="neg">-1.7%</span> YTD and also in a daily pullback. Large-cap growth (<span class="tk">IWF</span>) is down nearly 5% and fading fast. The market's former leaders are now its biggest drag.</p>
+<p>Meanwhile, small caps (<span class="tk">IWM</span>) are up <span class="pos">5.9%</span>, industrials (<span class="tk">XLI</span>) <span class="pos">10.6%</span>, and energy (<span class="tk">XLE</span>) <span class="pos">18.6%</span>. International equities are broadly outperforming: South Korea (<span class="tk">EWY</span>) <span class="pos">+28%</span>, Japan (<span class="tk">EWJ</span>) <span class="pos">+15%</span>, Brazil (<span class="tk">EWZ</span>) <span class="pos">+17%</span>, Europe (<span class="tk">VGK</span>) <span class="pos">+5%</span>.</p>
+
+<div class="callout"><p><strong>The big shift:</strong> Money has rotated out of US mega-cap growth and into international equities, commodities, energy, industrials, and banking. Semiconductors (equipment especially) are the major exception within tech.</p></div>
+
+<div class="grid-2">
+<div class="card" style="border-left:3px solid var(--green)"><h3 style="margin-top:0">Strong &amp; Trending</h3><div class="pill-row"><span class="tag tag-red">EWY +28%</span><span class="tag tag-red">COPX +20%</span><span class="tag tag-red">GDX +20%</span><span class="tag tag-yellow">XLE +19%</span><span class="tag tag-yellow">SOXX +13%</span><span class="tag tag-yellow">TAN +12%</span><span class="tag tag-yellow">GLD +15%</span><span class="tag tag-yellow">EWJ +15%</span><span class="tag tag-yellow">XLB +16%</span><span class="tag tag-yellow">XHB +17%</span></div></div>
+<div class="card" style="border-left:3px solid var(--red)"><h3 style="margin-top:0">Lagging or Rolling Over</h3><div class="pill-row"><span class="tag tag-blue">IGV -20%</span><span class="tag tag-blue">IBIT -24%</span><span class="tag tag-blue">ETHA -34%</span><span class="tag tag-gray">XLK -3.2%</span><span class="tag tag-gray">QQQ -1.7%</span><span class="tag tag-gray">XLY -1.6%</span><span class="tag tag-blue">XLF -6.0%</span><span class="tag tag-blue">INDA -3.3%</span></div></div>
+</div>
+
+<!-- WHAT'S WORKING -->
+<h2>What's Working</h2>
+<h3>Semiconductor Equipment - On Fire</h3>
+<p>The single most extended sub-sector in the entire screen. <span class="tk">AMAT</span> is up <span class="pos">35%</span> YTD and sits 43% above its 21-week moving average. <span class="tk">LRCX</span> is up <span class="pos">29%</span> and 41% above. KLAC, TER, ONTO, KLIC, UCTT, ICHR, COHU, AMKR, BESI, and ASML are all extended on both timeframes, all with Blue Sky resistance. The theme is real. But chasing at these levels is dangerous - any mean-reversion pullback will be swift. Own on dips, not here.</p>
+<h3>Gold &amp; Gold Miners</h3>
+<p><span class="tk">GLD</span> is up <span class="pos">15%</span> YTD and warming up toward extended. <span class="tk">GDX</span> is up <span class="pos">20%</span> and already extended, with a <span class="pos">141%</span> twelve-month gain. The entire precious metals complex - gold, silver (<span class="tk">SLV</span> +7%), gold royalties (<span class="tk">KGS</span> +34%) - is in Blue Sky. This looks like a secular trend, not a trade.</p>
+<h3>Uranium &amp; Nuclear Energy</h3>
+<p>A major reversal from deeply out-of-favor territory. <span class="tk">URA</span> is in Buy Zone with Blue Sky, up <span class="pos">12.6%</span> YTD and <span class="pos">79%</span> over twelve months. <span class="tk">CCJ</span> is warming up at <span class="pos">+14.7%</span> with a 130% twelve-month gain. <span class="tk">UUUU</span> is up <span class="pos">28.3%</span> YTD and <span class="pos">325%</span> over twelve months. <span class="tk">BWXT</span> is in Buy Zone with 84% annual gains. The nuclear theme has room - URA is only at 75% of its 52-week high.</p>
+<h3>International Markets</h3>
+<p>Broad-based rotation. <span class="tk">EWY</span> leads at <span class="pos">+28%</span> (extended). <span class="tk">EWJ</span> warming up at <span class="pos">+15%</span>. <span class="tk">EWZ</span> warming up at <span class="pos">+17%</span>. Europe (VGK, EWG, EWQ) in Buy Zone. Only weakness: India (<span class="tk">INDA</span>, daily downtrend, <span class="neg">-3.3%</span>) and China (<span class="tk">FXI</span>, fading, <span class="neg">-3.6%</span>).</p>
+<h3>Energy, Infrastructure &amp; Homebuilders</h3>
+<p>Energy (<span class="tk">XLE</span> <span class="pos">+18.6%</span>, <span class="tk">XOP</span> <span class="pos">+14.3%</span>) warming up with Blue Sky. Infrastructure (<span class="tk">PAVE</span> <span class="pos">+13.8%</span>, <span class="tk">PWR</span> <span class="pos">+19.6%</span>) benefiting from government spending. Homebuilders (<span class="tk">XHB</span> <span class="pos">+16.6%</span>, <span class="tk">TOL</span> <span class="pos">+23.6%</span>, <span class="tk">DHI</span> <span class="pos">+15.3%</span>) surprisingly strong. Regional banks (<span class="tk">KRE</span> <span class="pos">+8.6%</span>) quietly outperforming broader financials.</p>
+
+<!-- TREND CHANGES -->
+<h2>Trend Changes - What's Shifting</h2>
+<h3>Reversals: Bad to Good</h3>
+<p>Several areas that were dead money are now showing signs of life.</p>
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Sector</th><th>YTD</th><th>3Mo</th><th>Weekly</th><th>What's Happening</th></tr></thead>
+<tbody>
+<tr><td class="tk">URA</td><td>Uranium</td><td class="pos">+12.6%</td><td class="pos">+14.4%</td><td><span class="tag tag-green">Buy Zone</span></td><td>Deeply beaten down, now Blue Sky. 12Mo +79%.</td></tr>
+<tr><td class="tk">UUUU</td><td>Uranium Mining</td><td class="pos">+28.3%</td><td class="pos">+38.2%</td><td><span class="tag tag-yellow">Warming Up</span></td><td>Massive reversal. 12Mo +325%. Room before extended.</td></tr>
+<tr><td class="tk">CCJ</td><td>Uranium</td><td class="pos">+14.7%</td><td class="pos">+31.5%</td><td><span class="tag tag-yellow">Warming Up</span></td><td>Theme confirmed. 78% of 52W high.</td></tr>
+<tr><td class="tk">TAN</td><td>Solar</td><td class="pos">+12.3%</td><td class="pos">+19.5%</td><td><span class="tag tag-yellow">Warming Up</span></td><td>Dead for years. Now Blue Sky with momentum.</td></tr>
+<tr><td class="tk">LIT</td><td>Lithium</td><td class="pos">+8.8%</td><td class="pos">+13.2%</td><td><span class="tag tag-yellow">Warming Up</span></td><td>Recovering. 12Mo +70%. Daily Buy Zone.</td></tr>
+<tr><td class="tk">INTC</td><td>Semiconductors</td><td class="pos">+19.7%</td><td class="pos">+31.3%</td><td><span class="tag tag-yellow">Warming Up</span></td><td>Back from the dead. 12Mo +95%. Only 80% of high.</td></tr>
+<tr><td class="tk">XBI</td><td>Biotech</td><td class="pos">+3.3%</td><td class="pos">+12.2%</td><td><span class="tag tag-green">Buy Zone</span></td><td>Quiet YTD but 6Mo +40%. Building.</td></tr>
+<tr><td class="tk">EWZ</td><td>Brazil</td><td class="pos">+17.1%</td><td class="pos">+14.3%</td><td><span class="tag tag-yellow">Warming Up</span></td><td>EM rotation. Blue Sky resistance.</td></tr>
+</tbody></table></div>
+
+<h3>Reversals: Good to Bad</h3>
+<p>Momentum was positive but has rolled over.</p>
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Sector</th><th>YTD</th><th>3Mo</th><th>Weekly</th><th>What's Happening</th></tr></thead>
+<tbody>
+<tr><td class="tk">IWF</td><td>Large Cap Growth</td><td class="neg">-4.7%</td><td class="neg">-4.3%</td><td><span class="tag tag-green">Buy Zone</span></td><td>Fading fast. Daily pullback.</td></tr>
+<tr><td class="tk">XLK</td><td>Technology</td><td class="neg">-3.2%</td><td class="neg">-2.5%</td><td><span class="tag tag-green">Buy Zone</span></td><td>80% of 52W high. Daily pullback.</td></tr>
+<tr><td class="tk">XLF</td><td>Financials</td><td class="neg">-6.0%</td><td class="neg">-2.5%</td><td><span class="tag tag-green">Buy Zone</span></td><td>Was a leader. Daily downtrend now.</td></tr>
+<tr><td class="tk">META</td><td>Social/Tech</td><td class="neg">-0.5%</td><td class="pos">+6.1%</td><td><span class="tag tag-green">Buy Zone</span></td><td>Daily downtrend. 53% of 52W high.</td></tr>
+<tr><td class="tk">AAPL</td><td>Consumer Tech</td><td class="neg">-4.3%</td><td class="neg">-5.0%</td><td><span class="tag tag-green">Buy Zone</span></td><td>Fading. 75% of 52W high.</td></tr>
+</tbody></table></div>
+
+<!-- OVEREXTENDED -->
+<h2>Overextended - Caution Zones</h2>
+<p>More than 20% above key moving averages. Trends are real but chasing here is risky. Wait for pullbacks.</p>
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Sector</th><th>YTD</th><th>D21WMA</th><th>12Mo</th><th>Risk</th></tr></thead>
+<tbody>
+<tr><td class="tk">SNDK</td><td>Memory/Storage</td><td class="pos">+122%</td><td>+132%</td><td>+1,594%</td><td>Parabolic. Any pullback will be violent.</td></tr>
+<tr><td class="tk">ICHR</td><td>Semi Equipment</td><td class="pos">+121%</td><td>+113%</td><td>+37%</td><td>Parabolic. Beta 1.89.</td></tr>
+<tr><td class="tk">UCTT</td><td>Semi Equipment</td><td class="pos">+105%</td><td>+84%</td><td>+48%</td><td>Semi equip is HOT.</td></tr>
+<tr><td class="tk">EWY</td><td>South Korea</td><td class="pos">+28%</td><td>+35%</td><td>+132%</td><td>Country ETF stretched.</td></tr>
+<tr><td class="tk">GDX</td><td>Gold Miners</td><td class="pos">+20%</td><td>+23%</td><td>+141%</td><td>Wait for pullback to add.</td></tr>
+<tr><td class="tk">VRT</td><td>Data Center Infra</td><td class="pos">+33%</td><td>+36%</td><td>+113%</td><td>AI darling. Beta 2.08.</td></tr>
+<tr><td class="tk">AMAT</td><td>Semi Equipment</td><td class="pos">+35%</td><td>+43%</td><td>+97%</td><td>Don't initiate here.</td></tr>
+<tr><td class="tk">LRCX</td><td>Semi Equipment</td><td class="pos">+29%</td><td>+41%</td><td>+187%</td><td>Great name, wrong price.</td></tr>
+</tbody></table></div>
+
+<!-- DEAD MONEY -->
+<h2>Dead Money &amp; Don't Touch</h2>
+<p>Downtrend on both timeframes, heavy or overhead resistance, deeply negative YTD. Falling knives until the regime changes.</p>
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Sector</th><th>YTD</th><th>6Mo</th><th>12Mo</th><th>P/52W</th><th>Why Avoid</th></tr></thead>
+<tbody>
+<tr><td class="tk">PYPL</td><td>Digital Payments</td><td class="neg">-32%</td><td class="neg">-44%</td><td class="neg">-48%</td><td>2.6%</td><td>Near all-time lows.</td></tr>
+<tr><td class="tk">FIS</td><td>Fintech/Payments</td><td class="neg">-29%</td><td class="neg">-36%</td><td class="neg">-34%</td><td>1.3%</td><td>Payments in crisis.</td></tr>
+<tr><td class="tk">COIN</td><td>Crypto Exchange</td><td class="neg">-31%</td><td class="neg">-50%</td><td class="neg">-45%</td><td>7.8%</td><td>Crypto winter. Beta 3.7.</td></tr>
+<tr><td class="tk">MSTR</td><td>Bitcoin/Software</td><td class="neg">-16%</td><td class="neg">-66%</td><td class="neg">-60%</td><td>7.8%</td><td>Leveraged BTC imploding.</td></tr>
+<tr><td class="tk">NOW</td><td>Enterprise SW</td><td class="neg">-28%</td><td class="neg">-37%</td><td class="neg">-46%</td><td>7.3%</td><td>SaaS repricing continues.</td></tr>
+<tr><td class="tk">ADBE</td><td>Creative SW</td><td class="neg">-22%</td><td class="neg">-26%</td><td class="neg">-43%</td><td>4.8%</td><td>AI disruption fears.</td></tr>
+<tr><td class="tk">IGV</td><td>Software ETF</td><td class="neg">-20%</td><td class="neg">-23%</td><td class="neg">-23%</td><td>12.8%</td><td>Entire sector broken.</td></tr>
+<tr><td class="tk">IBIT</td><td>Bitcoin ETF</td><td class="neg">-24%</td><td class="neg">-30%</td><td class="neg">-29%</td><td>9.9%</td><td>Heavy resistance + downtrend.</td></tr>
+<tr><td class="tk">ETHA</td><td>Ethereum ETF</td><td class="neg">-34%</td><td class="neg">-35%</td><td class="neg">-23%</td><td>17.5%</td><td>-57% in 6 months.</td></tr>
+</tbody></table></div>
+
+<div class="callout callout-red"><p><strong>Broken themes:</strong> Software/SaaS (IGV, NOW, ADBE, SHOP, KVYO, GTLB, TOST), Crypto (IBIT, ETHA, COIN, MSTR, MARA, HOOD), and Payments (PYPL, FIS, FISV, FOUR, AFRM, ADYEY) are where money is leaving.</p></div>
+
+<!-- WHERE TO LOOK -->
+<h2>Where to Look Now</h2>
+<p>Buy Zone or Warming Up on weekly, Blue Sky resistance, positive momentum, reasonable distance from moving averages. The best risk-reward in the screen.</p>
+
+<div class="card-grid">
+<div class="card"><div class="header-row"><span class="tk">KRE</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Regional Banks ETF &middot; $70.86</div><p>Weekly and daily Buy Zone. Blue Sky. YTD +8.6%, 3Mo +16.6%. Quietly outperforming XLF.</p></div>
+<div class="card"><div class="header-row"><span class="tk">XBI</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Biotech ETF &middot; $125.56</div><p>Buy Zone both ways. Blue Sky. 3Mo +12.2%, 6Mo +40%. 90% of 52W high.</p></div>
+<div class="card"><div class="header-row"><span class="tk">URA</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Uranium ETF &middot; $51.85</div><p>Buy Zone. Blue Sky. 12Mo +79% but only 75% of 52W high. Nuclear theme with legs.</p></div>
+<div class="card"><div class="header-row"><span class="tk">PAVE</span> <span class="tag tag-yellow">Warming Up</span></div><div class="meta">Infrastructure ETF &middot; $51.72</div><p>Blue Sky. YTD +13.8%, 12Mo +34%. Government spending tailwind.</p></div>
+<div class="card"><div class="header-row"><span class="tk">NXPI</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Semiconductors &middot; $240.11</div><p>Buy Zone both ways. Blue Sky. Auto/industrial semi - less extended than equipment names.</p></div>
+<div class="card"><div class="header-row"><span class="tk">DHI</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Homebuilders &middot; $167.98</div><p>Buy Zone. Blue Sky. YTD +15.3%, 12Mo +30%. XHB confirms the trend.</p></div>
+<div class="card"><div class="header-row"><span class="tk">BWXT</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Nuclear Services &middot; $201.11</div><p>Buy Zone. Blue Sky. 12Mo +84%. Nuclear + defense exposure.</p></div>
+<div class="card"><div class="header-row"><span class="tk">ANET</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Networking &middot; $143.73</div><p>Buy Zone. Blue Sky. AI infrastructure play that hasn't gone parabolic.</p></div>
+<div class="card"><div class="header-row"><span class="tk">IBKR</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Brokerage &middot; $74.18</div><p>Buy Zone both ways. Blue Sky. 12Mo +26%. Clean setup.</p></div>
+<div class="card"><div class="header-row"><span class="tk">IWM</span> <span class="tag tag-green">Buy Zone</span></div><div class="meta">Small Cap ETF &middot; $263.54</div><p>Buy Zone. Blue Sky. Small caps finally participating. Broad domestic exposure.</p></div>
+</div>
+
+<!-- SINGLE NAMES TO AVOID -->
+<h2>Single Names to Avoid</h2>
+<div class="scroll-table"><table>
+<thead><tr><th>Ticker</th><th>Sector</th><th>YTD</th><th>Why Stay Away</th></tr></thead>
+<tbody>
+<tr><td class="tk">PYPL</td><td>Digital Payments</td><td class="neg">-32%</td><td>Near 52W lows. Downtrend + heavy resistance.</td></tr>
+<tr><td class="tk">ADBE</td><td>Creative Software</td><td class="neg">-22%</td><td>Heavy resistance. 12Mo -43%.</td></tr>
+<tr><td class="tk">MSFT</td><td>Software</td><td class="neg">-15%</td><td>Even MSFT in daily downtrend with overhead supply.</td></tr>
+<tr><td class="tk">AMZN</td><td>E-commerce</td><td class="neg">-12%</td><td>Downtrend + overhead supply.</td></tr>
+<tr><td class="tk">PLTR</td><td>Data Analytics</td><td class="neg">-22%</td><td>Was momentum darling. Now -25% D21WMA.</td></tr>
+<tr><td class="tk">SOFI</td><td>Digital Banking</td><td class="neg">-28%</td><td>-26% D21WMA. 46% of 52W high.</td></tr>
+<tr><td class="tk">UBER</td><td>Rideshare</td><td class="neg">-16%</td><td>Overhead supply. Growth premium evaporating.</td></tr>
+<tr><td class="tk">KKR</td><td>Alt Asset Mgmt</td><td class="neg">-21%</td><td>Entire alt asset space in downtrend.</td></tr>
+</tbody></table></div>
+
+<!-- THEME SUMMARY -->
+<h2>Theme Summary</h2>
+<div class="grid-2">
+<div class="card" style="border-left:3px solid var(--green)"><h3 style="margin-top:0;color:var(--green)">Working Themes</h3>
+<p><strong>Semi Equipment</strong> - Parabolic. Wait for pullbacks. (AMAT, LRCX, KLAC, TER, ONTO)</p>
+<p><strong>Gold &amp; Miners</strong> - GLD/GDX warming to extended. Secular trend.</p>
+<p><strong>Uranium/Nuclear</strong> - URA, CCJ, UUUU, BWXT. Buy Zone to Warming Up.</p>
+<p><strong>International</strong> - EWJ, EWY, EWZ, VGK. Rotation away from US growth.</p>
+<p><strong>Energy</strong> - XLE, XOP. Blue Sky. Steady.</p>
+<p><strong>Regional Banks</strong> - KRE + 200 underlying names. Best breadth in the screen.</p>
+<p><strong>Infrastructure</strong> - PAVE, XLI, PWR. Government spending tailwind.</p>
+<p style="margin-bottom:0"><strong>Homebuilders</strong> - XHB, TOL, DHI. Housing recovery narrative.</p>
+</div>
+<div class="card" style="border-left:3px solid var(--red)"><h3 style="margin-top:0;color:var(--red)">Broken Themes</h3>
+<p><strong>Software/SaaS</strong> - IGV -20% YTD. Sector-wide repricing.</p>
+<p><strong>Crypto</strong> - IBIT, ETHA, COIN, MSTR, MARA. Winter is here.</p>
+<p><strong>Payments/Fintech</strong> - PYPL, FIS, FISV, FOUR, AFRM. Wasteland.</p>
+<p><strong>Alt Asset Managers</strong> - KKR, BX, APO, ARES, OWL.</p>
+<p style="margin-bottom:0"><strong>US Mega-Cap Growth</strong> - META, AAPL, AMZN, MSFT. Former leaders now the drag.</p>
+</div>
+</div>
+
+<!-- BOTTOM LINE -->
+<h2>The Bottom Line</h2>
+<p>This market is telling you a clear story. The assets tied to the physical world - metals, energy, nuclear, infrastructure, manufacturing, international economies - are in sustained uptrends with Blue Sky above them. The assets tied to the digital world - software, crypto, payments, US mega-cap growth - are in persistent downtrends with heavy resistance overhead.</p>
+<p>For the technically-minded, the message is: own what's working, avoid what's not, and be patient with the extended names. The best entries come on pullbacks into Buy Zones within strong trends - not by chasing. The worst risk is catching a falling knife in a broken sector, no matter how cheap the fundamentals look.</p>
+<p><strong>Follow the money. Right now, it's flowing into things you can touch.</strong></p>
+
+<div class="footer">
+<span class="brand-sm">VICTAURS</span>
+This is a technical screening summary, not investment advice. Past performance is not indicative of future results. Always do your own due diligence. &middot; Data as of Feb 13, 2026
+</div>
+
+</div>
+</body>
+</html>
